@@ -1,4 +1,4 @@
-import { prueba } from "./incisoUno";
+import { ejecutarInciso1 } from "./incisoUno";
 
-console.log("========================= TP1 =============================");
-prueba();
+console.log("-------------------tp1----------------------");
+ejecutarInciso1();
