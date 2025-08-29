@@ -1,0 +1,26 @@
+{
+  "name": "programacion-iv",
+  "version": "1.0.0",
+  "description": "Entrega TP1: lunes, 8 de septiembre de 2025, 23:59",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:tp1": "node dist/tp1/src/index.js",
+    "start:tp2": "node dist/tp2/src/index.js",
+    "dev": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ralbalboa/Programacion-IV.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ralbalboa/Programacion-IV/issues"
+  },
+  "homepage": "https://github.com/ralbalboa/Programacion-IV#readme",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
