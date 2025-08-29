@@ -41,5 +41,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "include": ["tp1/src/**/*", "tp2/src/**/*"]
+  "include": ["tp1/src/**/*", "tp2/src/**/*"] //los archivos que esten en esas rutas se compilen hacia dist/ 
+  // (agregar segun la creacion de nuevos tps)
 }
