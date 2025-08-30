@@ -7,7 +7,4 @@ export abstract class Animal {
     hacerSonido(sonido: string): void {
         console.log(`${this.name} hace: ${sonido}`);
     }
-    moverse(mensaje: string): void {
-        console.log(`${this.name} ${mensaje}`);
-    }
 }
