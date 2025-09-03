@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "ej1": "node dist/tp1/src/ej1/index.js",
+    "ej2": "node dist/tp1/src/ej2/index.js",
     "start:tp2": "node dist/tp2/src/index.js",
     "dev": "tsc --watch"
   },
