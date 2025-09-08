@@ -42,12 +42,6 @@
 
 ## ⚠️ Problemas Identificados
 
-### 🔴 **CRÍTICO** - Ejercicio 1: Desviación de Consigna
-**Problema:** La interface `Animal` requiere métodos sin parámetros según la consigna:
-- Consigna: `hacerSonido(): void` y `moverse(): void` 
-- Implementado: `hacerSonido(sonido: string): void` y `moverse(mensaje: string): void`
-
-**Impacto:** No cumple exactamente con la especificación pedida.
 
 ### 🔴 **CRÍTICO** - Ejercicio 2: Nombre Incorrecto de Clase
 **Problema:** 
