@@ -1,5 +1,5 @@
-import { Figura } from "./Figura";
-export class Rectangulo extends Figura {
+import { FiguraGeometrica } from "./Figura";
+export class Rectangulo extends FiguraGeometrica {
     public largo:number;
     public ancho:number;
 

@@ -1,5 +1,5 @@
-import { Figura } from "./Figura";
-export class Circulo extends Figura {
+import { FiguraGeometrica } from "./Figura";
+export class Circulo extends FiguraGeometrica {
     public radio:number
     constructor(radio:number){
         super(); // hereda de la clase figura

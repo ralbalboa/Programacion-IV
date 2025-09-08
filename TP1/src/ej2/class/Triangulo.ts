@@ -1,5 +1,5 @@
-import { Figura } from "./Figura";
-export class Triangulo extends Figura{
+import { FiguraGeometrica } from "./Figura";
+export class Triangulo extends FiguraGeometrica{
     public base:number;
     public altura:number
 

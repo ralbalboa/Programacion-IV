@@ -1,3 +1,3 @@
-export abstract class Figura {
+export abstract class FiguraGeometrica {
     abstract calcularArea(): number;
 }
