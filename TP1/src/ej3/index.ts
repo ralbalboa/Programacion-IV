@@ -1,6 +1,7 @@
 import { EmpleadoTiempoCompleto } from "./class/EmpleadoTiempoCompleto";
 import { EmpleadoMedioTiempo } from "./class/EmpleadoMedioTiempo";
 import { Empleado } from "./class/Empleado";
+
 export function ejecutarInciso3(){
     console.log("======ej3=======");
     const empleados: Empleado[] = [

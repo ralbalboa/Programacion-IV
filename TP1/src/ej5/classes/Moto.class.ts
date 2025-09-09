@@ -18,9 +18,16 @@ export class Moto extends Vehiculo implements MotoInterface {
         this.cilindrada = cilindrada
     }
 
-    public colgarMoto(moto: Moto) {
+    public colgarMoto(moto: Moto): void {
         console.log(
             `Moto colgada: ${moto.Cilindrada}cc, año ${moto["anio"]}, patente ${moto["patente"]}, marca ${moto["marca"]}`
         )
+    }
+    
+    public acelerar(): void {
+        console.log("La moto esta acelerando")
+    }
+    public frenar(): void {
+        console.log("La moto esta frenando")
     }
 }

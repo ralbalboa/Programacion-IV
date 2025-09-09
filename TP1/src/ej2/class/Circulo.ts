@@ -1,8 +1,9 @@
-import { Figura } from "./Figura";
-export class Circulo extends Figura {
-    public radio:number
+import { FiguraGeometrica } from "./FiguraGeometrica.class";
+export class Circulo extends FiguraGeometrica {
+    protected radio:number
+    protected nombre:string = "Circulo"
     constructor(radio:number){
-        super(); // hereda de la clase figura
+        super("Circulo");
         this.radio = radio;
     }
 

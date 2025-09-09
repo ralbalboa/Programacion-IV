@@ -45,4 +45,11 @@ export class Auto extends Vehiculo implements AutoInterface {
     protected set Airbags(valor: boolean) {
         this.airbags = valor
     }
+
+    public acelerar(): void {
+        console.log("El auto esta acelerando")
+    }
+    public frenar(): void {
+        console.log("El auto esta frenando")
+    }
 }

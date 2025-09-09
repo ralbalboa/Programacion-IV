@@ -53,8 +53,11 @@ export abstract class Vehiculo implements VehiculoInterface {
         this.patente = patente
     }
 
-   public set Electrico(valor: boolean) {
-    this.esElectrico = valor;
+    public set Electrico(valor: boolean) {
+        this.esElectrico = valor;
     }
+
+    public abstract acelerar(): void;
+    public abstract frenar(): void;
 
 }

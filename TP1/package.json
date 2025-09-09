@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "ej1": "node dist/ej1/index.js",
     "ej2": "node dist/ej2/index.js",
+    "ej3": "node dist/ej3/index.js",
     "ej4": "node dist/ej4/index.js",
     "ej5": "node dist/ej5/index.js",
     "clean": "rimraf dist"
