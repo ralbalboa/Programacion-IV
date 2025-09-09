@@ -56,11 +56,11 @@ Para correr cada ejercicio por separado, ejecuta el comando correspondiente:
 
 ### Ejercicio 3
 
-![UML Ejercicio 3](.\src\ej3\UML-ej3.png)
+![UML Ejercicio 3](src\ej3\UML-ej3.png)
 
 ### Ejercicio 5
 
-![UML Ejercicio 5](.\src\ej5\UML-ej5.png)
+![UML Ejercicio 5](src\ej5\UML-ej5.png)
 
 ---
 
