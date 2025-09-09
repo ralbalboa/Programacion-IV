@@ -1,5 +1,14 @@
 # Cómo ejecutar el TP1
 
+## 0. Clonar el repositorio
+
+Clona el repositorio:
+
+```sh
+git clone https://github.com/ralbalboa/Programacion-IV
+cd Programacion-IV/TP1
+```
+
 ## 1. Instalar dependencias
 
 Ejecuta el siguiente comando en la terminal para instalar las dependencias del proyecto:
@@ -59,3 +68,6 @@ Para correr cada ejercicio por separado, ejecuta el comando correspondiente:
 - Puedes ejecutar el entorno de desarrollo con `npm run dev`.
 - Para verificar tipos, usa `npm run typecheck`.
 - Para limpiar la carpeta de compilados, ejecuta `npm run clean`.
+
+
+**Integrantes**: Lucía Canclini, Franco Juárez, Mateo Muscolino, Rodrigo Alvarez
