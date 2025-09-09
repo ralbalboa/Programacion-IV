@@ -1,6 +1,7 @@
 import { Animal } from "./Animal.class";
+import { PerroInterface } from "../interface/Perro.interface";
 
-export class Perro extends Animal {
+export class Perro extends Animal implements PerroInterface {
     raza: string;
     edad: number;
 
@@ -8,6 +9,14 @@ export class Perro extends Animal {
         super(name);
         this.raza = raza;
         this.edad = edad;
+    }
+
+    moverse(): void {
+        console.log(`${this.name} corre felizmente.`);
+    }
+
+    hacerSonido(): void {
+        console.log(`${this.name} dice: Guau Guau!`);
     }
 
 }

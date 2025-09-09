@@ -1,13 +1,11 @@
-export abstract class Animal {
+import { Animal as AnimalInterface } from "../interface/Animal.interface";
+
+export abstract class Animal implements AnimalInterface {
     name: string;
 
     constructor(name: string) {
         this.name = name;
     }
-    hacerSonido(sonido: string): void {
-        console.log(`${this.name} hace: ${sonido}`);
-    }
-    moverse(mensaje: string): void {
-        console.log(`${this.name} ${mensaje}`);
-    }
+    abstract moverse(): void;
+    abstract hacerSonido(): void;
 }

@@ -1,6 +1,7 @@
 import { Vehiculo } from "./Vehiculo.class";
+import { Moto as MotoInterface } from "../interface/Moto.interface";
 
-export class Moto extends Vehiculo {
+export class Moto extends Vehiculo implements MotoInterface {
     protected cilindrada: number 
 
     constructor(marca: string, kilometraje: number, velocidadMaxima: number, anio: number, patente:string, esElectrico: boolean, cilindrada: number) {

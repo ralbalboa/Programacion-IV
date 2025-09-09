@@ -1,4 +1,6 @@
-export abstract class Vehiculo {
+import { Vehiculo as VehiculoInterface } from "../interface/Vehiculo.interface";
+
+export abstract class Vehiculo implements VehiculoInterface {
 
     protected marca: string
     protected kilometraje: number

@@ -1,7 +1,8 @@
 import { Vehiculo } from "./Vehiculo.class"
 import { traccion } from "../interface/Auto.interface"
+import { Auto as AutoInterface } from "../interface/Auto.interface"
 
-export class Auto extends Vehiculo {
+export class Auto extends Vehiculo implements AutoInterface {
     protected cantidadDePuertas: number
     protected traccion: traccion
     protected airbags: boolean

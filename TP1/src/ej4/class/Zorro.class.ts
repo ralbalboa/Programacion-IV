@@ -6,4 +6,8 @@ export class Zorro extends Animal {
         super(name);
         this.especie = especie;
     }
+
+    hacerSonido(): void {
+        console.log(`${this.name} dice: Auuuu!`);
+    }
 }

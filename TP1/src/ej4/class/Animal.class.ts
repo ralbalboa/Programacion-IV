@@ -4,7 +4,5 @@ export abstract class Animal {
     constructor(name: string) {
         this.name = name;
     }
-    hacerSonido(sonido: string): void {
-        console.log(`${this.name} hace: ${sonido}`);
-    }
+    abstract hacerSonido(): void;
 }

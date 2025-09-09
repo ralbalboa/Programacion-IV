@@ -11,4 +11,8 @@ export class Pajaro extends Animal {
     volar(): void {
         console.log(`${this.name} está volando`);
     }
+
+    hacerSonido(): void {
+        console.log(`${this.name} dice: Pío Pío!`);
+    }
 }
