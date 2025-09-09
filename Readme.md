@@ -1,1 +1,3 @@
-Entrega TP1: lunes, 8 de septiembre de 2025, 23:59
+# Repositorio de Programación IV
+
+Integrantes: Lucía Canclini, Franco Juárez, Mateo Muscolino, Rodrigo Alvarez
