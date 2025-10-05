@@ -1,2 +1,7 @@
 /node_modules
 /dist
+TP2/node_modules
+TP2/dist
+/.vscode
+/.DS_Store
+/.env
