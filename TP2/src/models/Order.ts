@@ -1,64 +1,61 @@
-import { v4 as uuidv4 } from 'uuid';
-import { orderSize, orderStatus } from '../types/orderTypes';
+import { v4 as uuidv4 } from "uuid";
+
+type orderSize = 'S' | 'M' | 'L'; 
+
+type orderStatus = 'delivered' | 'pending' | 'canceled'; 
 
 const basePrice = {
-  s: 3000,
-  m: 4000,
-  l: 5000,
-} as const;
+  S: 3000,
+  M: 4000,
+  L: 5000,
+} as const; // as const para solo lectura
 
-const toppings = 700;
+const toppingPrice = 700; 
 
 export class Order {
-    protected address
-    protected status
-    protected orderSize
-    protected toppings: string[]
-    protected id:string
+  private address: string; 
+  private status: orderStatus; 
+  private orderSize: orderSize; 
+  private toppings: string[];
+  private id: string;
 
-    constructor(id: string, orderSize: orderSize, toppings: string[], address: string, status: "pending") {
-        this.id = uuidv4();
-        this.orderSize = orderSize;
-        this.toppings = toppings;
-        this.address = address;
-        this.status = status;
-    }
-    //Getters
-    public getId(): string {
-        return this.id;
-    }
+  
+  constructor(orderSize: orderSize, toppings: string[], address: string) {
+    this.id = uuidv4();
+    this.orderSize = orderSize;
+    this.toppings = toppings;
+    this.address = address;
+    this.status = "pending";
+  }
 
-    public getAddress(): string {
-        return this.address;
-    }
+  // Getters
+  public getId(): string {
+    return this.id;
+  }
+  public getAddress(): string {
+    return this.address;
+  }
+  public getStatus(): orderStatus {
+    return this.status;
+  }
+  public getOrderSize(): orderSize {
+    return this.orderSize;
+  }
+  public getToppings(): string[] {
+    return this.toppings;
+  }
 
-    public getStatus():orderStatus {
-        return this.status;
-    }
+  // Método para cambiar el estado
+  public setStatus(newStatus: orderStatus): void {
+    this.status = newStatus;
+  }
 
-    public getOrderSize(): orderSize {
-        return this.orderSize;
-    }
+  public setToppings(toppings: string[]): void {
+    this.toppings = toppings;
+  }
 
-    public getToppings(): string[] {
-        return this.toppings;
-    }
-
-    // SETTERS
-    public setToppings(toppings: string[]): void {
-        if(toppings.length > 4 || toppings.length < 0) {
-            this.toppings = toppings;   
-        }
-    }
-
-    public setOrderSize(orderSize: orderSize): void {
-        this.orderSize = orderSize
-    }
-
-    // METHODS
-    public calculatePrice(): number {
-        return basePrice[this.orderSize] + (this.toppings.length * toppings);
-    }
-    
+  // METHODS
+  public calculatePrice(): number {
+    return basePrice[this.orderSize] + this.toppings.length * toppingPrice;
+  }
 }
-
