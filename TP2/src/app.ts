@@ -20,6 +20,7 @@ class Server {
         this.app.use( cors());
     }
     routes(){
+        // definir rutas
         //this.app.use("/orders",userRoute);
         //this.app.use( "/orders/:id",categoryRoute);
         //this.app.use("/orders/:id/cancel",productRouote)
