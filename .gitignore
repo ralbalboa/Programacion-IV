@@ -5,3 +5,4 @@ TP2/dist
 /.vscode
 /.DS_Store
 /.env
+/coverage
