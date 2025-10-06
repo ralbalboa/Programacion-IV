@@ -47,6 +47,12 @@ describe("OrderService", () => {
     expect(created).toHaveProperty("id");
     expect(created).toHaveProperty("price");
     expect(created.getPrice()).toBe(4700); // 4000 + 700 (M + 1 topping)
-    id = created.getId();
+    id = created.getId(); // para validar en el siguiente test
+  });
+
+  it("getOrderById -> devuelve la orden creada por id", () => {
+    const order = svc.getOrderById(id);
+    expect(order).not.toBeNull();
+    expect(order?.getId()).toBe(id); // el id debe coincidir
   });
 });

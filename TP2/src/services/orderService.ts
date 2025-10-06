@@ -11,7 +11,10 @@ export class OrderService {
         return newOrder;
     }
     //get order por id
-
+    public getOrderById(id: string): Order | null {
+        const order = orders.find(o => o.getId() === id);
+        return order || null;
+    }
     //cancelar orden
 
     //get order ?status

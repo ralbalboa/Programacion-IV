@@ -21,3 +21,21 @@ export const createOrder = (req: Request, res: Response) => {
     res.status(400).json({ message: "Error creando la orden", error });
   }
 };
+
+//get order por id
+export const getOrderById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const orderService = new OrderService();
+  if (!id) {
+    return res.status(400).json({ message: "ID de orden es requerido" });
+  }
+  try {
+    const order = orderService.getOrderById(id);
+    if (!order) {
+      return res.status(404).json({ message: "Orden no encontrada" });
+    }
+    res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json({ message: "Error obteniendo la orden", error });
+  }
+};
