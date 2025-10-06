@@ -1,41 +1,10 @@
 // sum.test.ts
-import { describe, test, expect, it } from 'vitest'; // No necesario si globals: true
+import { describe, expect, it } from 'vitest';
 import { OrderService } from '../services/orderService';
 
 
-// TESTEAR EL SERVIDOR Y CONEXIÓN DE BASE DE DATOS
-// CONSOLE.LOG DIGA "Escuchando en el puerto 3000"
-
-// describe('Servidor y base de datos', () => {
-//     it('El servidor debería estar corriendo y la base de datos conectada', () => {
-    
-//   });
-
-// });
-// describe('Validación del GET de orders', () => {
-
-//     // que tenga un id
-//     // el formato del id
-//     // que tenga un orderSize
-//     // que tenga un orderStatus
-//     // que tenga toppings
-//     // que tenga address
-//     test('El GET debería retornar un objeto de tipo order', () => {
-//     console.log("Test funcionando");
-//   });
-
-// });
-
-// describe('Validación de POST de orders', () => {
-//     test('Otro test de ejemplo', () => {
-//     expect(1 + 1).toBe(2);
-//   });
-
-// });
-
-//npm test para correrlo
 describe("OrderService", () => {
-  const svc = new OrderService(); // instancia del servicio
+  const svc = new OrderService();
   let id: string;
 
   it("createOrder -> devuelve id, price y verifica que el total sea calculado correctamente", () => {
@@ -54,5 +23,39 @@ describe("OrderService", () => {
     const order = svc.getOrderById(id);
     expect(order).not.toBeNull();
     expect(order?.getId()).toBe(id); // el id debe coincidir
+  });
+
+  // TEST ROJO para probar la cancelación de un pedido
+  it("cancelOrder -> cancela una orden pendiente", () => {
+    // Crear una orden primero
+    const created = svc.createOrder({
+      orderSize: "L",
+      toppings: ["pepperoni", "aceitunas"],
+      address: "Alem 742"
+    });
+
+    // Intentar cancelarla
+    const canceled = svc.cancelOrder(created.getId());
+
+    // Verificar que el status cambió a "canceled"
+    expect(canceled.getStatus()).toBe("canceled");
+  });
+
+  // TEST ROJO - Validación de regla de negocio
+  it("cancelOrder -> NO debe cancelar una orden con status 'delivered'", () => {
+    // Crear una orden
+    const created = svc.createOrder({
+      orderSize: "S",
+      toppings: ["mozzarella"],
+      address: "Alem 1234"
+    });
+
+    // Simular que la orden fue entregada
+    created.setStatus("delivered");
+
+    // Intentar cancelarla debería dar un error
+    expect(() => {
+      svc.cancelOrder(created.getId());
+    }).toThrow("No se puede cancelar una orden que ya fue entregada");
   });
 });

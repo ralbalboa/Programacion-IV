@@ -1,33 +1,34 @@
 import express from 'express';
 import cors from 'cors';
-import createOrder from './routes/orderRoutes';
+import orderRoutes from './routes/orderRoutes';
 
+// Función que crea la app Express SIN levantar el servidor
+export function makeApp() {
+    const app = express();
+
+    // Middlewares
+    app.use(express.json({limit: '150mb'}));
+    app.use(cors());
+
+    // Rutas
+    app.use("/orders", orderRoutes);
+
+    return app;
+}
+
+// Clase Server para producción
 class Server {
     public app: express.Application;
     public port: number;
 
     constructor(port: number) {
         this.port = port;
-        this.app = express();
-        this.middlewares();
-        this.routes();
-        
+        this.app = makeApp(); // Usa makeApp()
     }
-    middlewares(){
-        this.app.use(express.json({limit: '150mb'}));
-  
-        //cors
-        this.app.use( cors());
-    }
-    routes(){
-        // definir rutas
-        this.app.use("/orders", createOrder);
-        //this.app.use( "/orders/:id",categoryRoute);
-        //this.app.use("/orders/:id/cancel",productRouote)
-        //this.app.use("/orders?status",restartRoute);
-    }
+
     start(callback: () => void) {
         this.app.listen(this.port, callback);
     }
 }
+
 export default Server;
