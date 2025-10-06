@@ -3,7 +3,7 @@ import {z} from 'zod';
 const orderSizeSchema = z.enum(['S', 'M', 'L']);
 
 
-export const createOrderSchema = z.object({
+export const createOrderSchema = z.object({ // el schema sirve para validar que los datos que me llegan son correctos
     orderSize: orderSizeSchema,
 
     toppings: 

@@ -18,6 +18,7 @@ export class Order {
   private orderSize: orderSize; 
   private toppings: string[];
   private id: string;
+  private price: number;
 
   
   constructor(orderSize: orderSize, toppings: string[], address: string) {
@@ -26,6 +27,7 @@ export class Order {
     this.toppings = toppings;
     this.address = address;
     this.status = "pending";
+    this.price = this.calculatePrice();
   }
 
   // Getters
@@ -43,6 +45,9 @@ export class Order {
   }
   public getToppings(): string[] {
     return this.toppings;
+  }
+  public getPrice(): number {
+    return this.price;
   }
 
   // Método para cambiar el estado

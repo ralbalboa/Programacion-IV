@@ -10,11 +10,10 @@ export class OrderService {
         orders.push(newOrder);
         return newOrder;
     }
-    //buscar por id
+    //get order por id
 
     //cancelar orden
 
-    //listar
+    //get order ?status
 
-    //listar por estado
 }

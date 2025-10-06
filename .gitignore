@@ -5,4 +5,9 @@ TP2/dist
 /.vscode
 /.DS_Store
 /.env
+// ...existing code...
 /coverage
+TP2/coverage
+**/coverage
+/.nyc_output
+coverage-final.json

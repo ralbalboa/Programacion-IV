@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-
+import createOrder from './routes/orderRoutes';
 
 class Server {
     public app: express.Application;
@@ -21,7 +21,7 @@ class Server {
     }
     routes(){
         // definir rutas
-        //this.app.use("/orders",userRoute);
+        this.app.use("/orders", createOrder);
         //this.app.use( "/orders/:id",categoryRoute);
         //this.app.use("/orders/:id/cancel",productRouote)
         //this.app.use("/orders?status",restartRoute);
