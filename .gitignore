@@ -2,6 +2,7 @@
 /dist
 TP2/node_modules
 TP2/dist
+TP3/cafeteria/node_modules
 /.vscode
 /.DS_Store
 /.env
@@ -11,3 +12,8 @@ TP2/coverage
 **/coverage
 /.nyc_output
 coverage-final.json
+/.claude
+.claude/
+TP3/RESUMEN.md
+TP3/CHECKLIST.md
+TP3/INSTRUCCIONES_ENTREGA.md
