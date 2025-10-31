@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  // GET /api/menu - Retorna el menú de productos
   http.get('/api/menu', () => {
     return HttpResponse.json([
       { id: '1', name: 'Café', price: 150 },
@@ -11,7 +10,6 @@ export const handlers = [
     ]);
   }),
 
-  // POST /api/orders - Simula el envío de un pedido
   http.post('/api/orders', async ({ request }) => {
     const body = await request.json();
     return HttpResponse.json(

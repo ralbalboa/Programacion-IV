@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Product } from '../types/product';
 
 export interface OrderItem extends Product {
-  orderId: string; // ID único para cada item en el pedido
+  orderId: string;
 }
 
 export function useOrder() {

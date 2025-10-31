@@ -6,4 +6,8 @@ export const ProductSchema = z.object({
   price: z.number().positive(),
 });
 
-export type Product = z.infer<typeof ProductSchema>;
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+};
