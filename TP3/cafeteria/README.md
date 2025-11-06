@@ -2,7 +2,7 @@
 
 Trabajo Práctico 3 - Desarrollo Guiado por Pruebas (TDD) con React, TypeScript y MSW.
 
-## 🎯 Descripción
+## Descripción
 
 Aplicación de cafetería que permite:
 - Visualizar menú de productos
@@ -12,7 +12,7 @@ Aplicación de cafetería que permite:
 - Enviar pedido al servidor (simulado con MSW)
 - Manejo de errores y casos límite
 
-## 🧰 Stack Tecnológico
+## Stack Tecnológico
 
 - **React 19** + **TypeScript**
 - **Vite** - Build tool
@@ -21,13 +21,13 @@ Aplicación de cafetería que permite:
 - **MSW (Mock Service Worker)** - Mock de API
 - **Zod** - Validación de schemas
 
-## 📦 Instalación
+## Instalación
 
 ```bash
 npm install --legacy-peer-deps
 ```
 
-## 🚀 Comandos
+## Comandos
 
 ```bash
 # Modo desarrollo
@@ -49,7 +49,7 @@ npm run test:coverage
 npm run build
 ```
 
-## 🧪 Testing
+## Testing
 
 El proyecto fue desarrollado siguiendo **TDD (Test-Driven Development)** con el ciclo **Rojo → Verde → Refactor**.
 
@@ -76,7 +76,7 @@ npm test HU2
 npm test Integration
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
@@ -95,7 +95,7 @@ src/
 └── *.test.tsx             # Archivos de tests
 ```
 
-## 🔄 Flujo de la Aplicación
+## Flujo de la Aplicación
 
 1. **Cargar menú** - La app obtiene los productos desde `/api/menu` (mockeado)
 2. **Agregar productos** - Usuario clickea "Agregar" en cada producto
@@ -104,27 +104,27 @@ src/
 5. **Enviar pedido** - POST a `/api/orders` (mockeado)
 6. **Confirmación** - Muestra mensaje y limpia el pedido
 
-## 🧩 Historias de Usuario Implementadas
+## Historias de Usuario Implementadas
 
-### ✅ HU1 - Visualización inicial del menú
+### HU1 - Visualización inicial del menú
 Muestra listado de productos disponibles desde la API.
 
-### ✅ HU2 - Agregar ítem al pedido
+### HU2 - Agregar ítem al pedido
 Permite agregar productos al pedido mediante botones.
 
-### ✅ HU3 - Calcular total del pedido
+### HU3 - Calcular total del pedido
 Calcula y muestra el total dinámicamente.
 
-### ✅ HU4 - Eliminar ítem del pedido
+### HU4 - Eliminar ítem del pedido
 Permite remover items individuales del pedido.
 
-### ✅ HU5 - Enviar pedido
+### HU5 - Enviar pedido
 Envía el pedido al servidor y muestra confirmación.
 
-### ✅ HU6 - Casos límite
+### HU6 - Casos límite
 Maneja errores de red, servidor y menú vacío con mensajes apropiados.
 
-## 🎨 Características Adicionales
+## Características Adicionales
 
 - **Estado de carga** - Muestra "Cargando..." mientras obtiene datos
 - **Manejo de errores** - Mensajes claros y opción de reintentar
@@ -133,23 +133,23 @@ Maneja errores de red, servidor y menú vacío con mensajes apropiados.
 - **Confirmación** - Mensaje verde "Pedido confirmado"
 - **Reset automático** - Limpia el pedido tras confirmar
 
-## 🧪 Cobertura de Tests
+## Cobertura de Tests
 
 Todos los tests pasan exitosamente:
-- ✅ 6 Historias de Usuario completas
-- ✅ 3 Tests de integración end-to-end
-- ✅ Casos límite y manejo de errores
-- ✅ Total: ~25 tests
+- 6 Historias de Usuario completas
+- 3 Tests de integración end-to-end
+- Casos límite y manejo de errores
+- Total: ~25 tests
 
-## 📚 Metodología TDD
+## Metodología TDD
 
 Cada funcionalidad fue desarrollada siguiendo:
 
-1. **🔴 ROJO** - Escribir test que falle
-2. **🟢 VERDE** - Implementar código mínimo para pasar el test
-3. **🔵 REFACTOR** - Mejorar el código manteniendo los tests en verde
+1. **ROJO** - Escribir test que falle
+2. **VERDE** - Implementar código mínimo para pasar el test
+3. **REFACTOR** - Mejorar el código manteniendo los tests en verde
 
-## 🔗 API Endpoints (Mockeados con MSW)
+## API Endpoints (Mockeados con MSW)
 
 ### GET `/api/menu`
 Retorna el listado de productos disponibles.
@@ -184,10 +184,6 @@ Recibe el pedido y retorna confirmación.
 }
 ```
 
-## 👨‍💻 Desarrollo
+## Desarrollo
 
 Este proyecto fue desarrollado completamente con **TDD**, escribiendo primero los tests y luego implementando la funcionalidad mínima necesaria para hacerlos pasar.
-
-## 📄 Licencia
-
-Proyecto académico
