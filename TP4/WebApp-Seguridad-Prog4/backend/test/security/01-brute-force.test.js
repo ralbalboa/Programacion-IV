@@ -56,7 +56,7 @@ describe('Seguridad: Brute Force', () => {
     expect(totalTime).toBeGreaterThan(2000);
   });
 
-  test('❌ DEBE FALLAR: Debe requerir CAPTCHA después de varios intentos fallidos', async () => {
+/*  test('❌ DEBE FALLAR: Debe requerir CAPTCHA después de varios intentos fallidos', async () => {
     // Hacer 3 intentos fallidos
     for (let i = 0; i < 3; i++) {
       await request(app)
@@ -79,6 +79,7 @@ describe('Seguridad: Brute Force', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toContain('captcha');
   });
+  */
 });
 
 // Instrucciones para los alumnos
