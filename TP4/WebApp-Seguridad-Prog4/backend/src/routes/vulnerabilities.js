@@ -26,7 +26,8 @@ const createRouter = (csrfProtection) => {
 };
 
 // Exportar como router por defecto (para compatibilidad con tests)
-module.exports = createRouter();
+const router = createRouter();
+module.exports = router;
 
-// También exportar como función
-module.exports = createRouter;
+// También exportar la función
+module.exports.createRouter = createRouter;
