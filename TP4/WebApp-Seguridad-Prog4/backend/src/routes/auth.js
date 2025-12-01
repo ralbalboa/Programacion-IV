@@ -7,7 +7,7 @@ const authController = require('../controllers/authController');
 // Permite más intentos para que el controller maneje delay y CAPTCHA primero
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 5, 
+  max: 50, 
   standardHeaders: true,
   legacyHeaders: false,
 });
