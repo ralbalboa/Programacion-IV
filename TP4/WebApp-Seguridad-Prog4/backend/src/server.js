@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 // Importar configuraciones y utilidades
 const { connectWithRetry } = require('./config/database');
 const { initializeFiles } = require('./utils/fileInit');
-const { errorHandler, notFound } = require('./middleware/errorHandler');
+const { errorHandler, csrfErrorHandler, notFound } = require('./middleware/errorHandler');
 
 // Importar rutas
 const routes = require('./routes');
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // NECESARIO para csurf con cookies
 
 // Servir archivos estáticos (uploads)
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -37,7 +39,10 @@ app.use(session({
 // Usar todas las rutas con prefijo /api
 app.use('/api', routes);
 
-// Middleware de manejo de errores
+// Middleware de manejo de errores CSRF primero
+app.use(csrfErrorHandler);
+
+// Middleware de manejo de errores general
 app.use(notFound);
 app.use(errorHandler);
 

@@ -3,17 +3,17 @@ const csrf = require('csurf');
 const router = express.Router();
 
 // Configurar CSRF protection
-const csrfProtection = csrf({ cookie: false });
+const csrfProtection = csrf({ cookie: true });
 
+// CSRF Token endpoint - debe estar ANTES de las rutas protegidas
+// NECESARIO: Endpoint para que el test pueda obtener un token (aunque el primer test no lo usa, es esencial)
+router.get('/csrf-token', csrfProtection, (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
 // Importar todas las rutas
 const authRoutes = require('./auth');
 const productRoutes = require('./products');
 const captchaRoutes = require('./captcha');
-
-// CSRF Token endpoint - debe estar ANTES de las rutas protegidas
-router.get('/csrf-token', csrfProtection, (req, res) => {
-  res.json({ csrfToken: req.csrfToken() });
-});
 
 // Usar las rutas
 router.use('/', authRoutes);
