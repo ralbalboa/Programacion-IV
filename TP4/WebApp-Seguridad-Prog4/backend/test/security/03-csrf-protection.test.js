@@ -13,7 +13,6 @@ describe('Seguridad: CSRF (Cross-Site Request Forgery)', () => {
   beforeEach(() => {
     app = express();
     
-    // Parser de cookies NECESARIO para csurf con cookies
     app.use(cookieParser());
     
     app.use(express.json());

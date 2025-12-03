@@ -12,7 +12,6 @@ const csrfErrorHandler = (err, req, res, next) => {
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
 
-  // Manejar errores específicos de CSRF
   if (err.code === 'EBADCSRFTOKEN') {
     return res.status(403).json({
       error: 'CSRF token validation failed'

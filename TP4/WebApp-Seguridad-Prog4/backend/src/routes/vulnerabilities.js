@@ -3,14 +3,11 @@ const csrf = require('csurf');
 const vulnerabilityController = require('../controllers/vulnerabilityController');
 const { uploadMiddleware, uploadFile } = require('../controllers/uploadController');
 
-// Crear CSRF protection por defecto (si no se pasa uno)
 const defaultCsrfProtection = csrf({ cookie: true });
 
-// Crear router base
 const createRouter = (csrfProtection) => {
   const router = express.Router();
   
-  // Usar csrfProtection por defecto si no se proporciona uno
   const protection = csrfProtection || defaultCsrfProtection;
 
   // Command Injection
@@ -28,5 +25,4 @@ const createRouter = (csrfProtection) => {
   return router;
 };
 
-// Exportar como función
 module.exports = createRouter;
