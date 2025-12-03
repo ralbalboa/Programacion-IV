@@ -1,6 +1,6 @@
 // Middleware para manejo de errores CSRF específico
 const csrfErrorHandler = (err, req, res, next) => {
-  if (err.code === 'EBADCSRFTOKEN') {
+  if (err.statusCode === 403) {
     return res.status(403).json({
       error: 'CSRF token validation failed'
     });
@@ -12,7 +12,7 @@ const csrfErrorHandler = (err, req, res, next) => {
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
 
-  if (err.code === 'EBADCSRFTOKEN') {
+  if (err.statusCode === 403) {
     return res.status(403).json({
       error: 'CSRF token validation failed'
     });

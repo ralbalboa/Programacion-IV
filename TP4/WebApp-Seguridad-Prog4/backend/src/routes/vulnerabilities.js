@@ -5,6 +5,7 @@ const { uploadMiddleware, uploadFile } = require('../controllers/uploadControlle
 
 const defaultCsrfProtection = csrf({ cookie: true });
 
+// Crear router base
 const createRouter = (csrfProtection) => {
   const router = express.Router();
   
@@ -25,4 +26,8 @@ const createRouter = (csrfProtection) => {
   return router;
 };
 
+// Exportar como router por defecto (para compatibilidad con tests)
+//module.exports = createRouter();
+
+// También exportar como función
 module.exports = createRouter;

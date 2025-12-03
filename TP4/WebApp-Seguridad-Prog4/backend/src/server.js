@@ -42,7 +42,7 @@ app.use('/api', routes);
 // Middleware de manejo de errores CSRF primero
 app.use(csrfErrorHandler);
 
-// Middleware de manejo de errores general
+// Middleware de manejo de errores
 app.use(notFound);
 app.use(errorHandler);
 

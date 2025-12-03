@@ -22,7 +22,7 @@ router.use('/', captchaRoutes);
 
 // Importar rutas de vulnerabilidades con CSRF
 const vulnerabilityRoutes = require('./vulnerabilities');
-router.use('/', vulnerabilityRoutes(csrfProtection));
+router.use('/', vulnerabilityRoutes(csrfProtection)); // Pasar csrf como parámetro
 
 // Ruta de prueba
 router.get('/health', (req, res) => {
