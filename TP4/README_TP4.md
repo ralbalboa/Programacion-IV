@@ -234,3 +234,8 @@ Todos los tests de SQL Injection pasan.
 ![Test 7 Exito](img/test-07b-pasa.png)
 
 ---
+
+## RESULTADOS FINALES
+Todos los 4 tests de Brute Force, Command Injection, CSRF y SQL Injection pasaron exitosamente.
+###
+![Tests Finales](img/test-08-final.png)
