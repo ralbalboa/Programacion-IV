@@ -21,7 +21,7 @@ git clone https://github.com/ralbalboa/Programacion-IV
 ### Ejecutar los tests:
 ```bash
 
-cd TP4/WebApp-Seguridad-Prog4/backend
+cd Programacion-IV/TP4/WebApp-Seguridad-Prog4/backend
 npm install
 npm run test:security
 ```
