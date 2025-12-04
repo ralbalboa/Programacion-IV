@@ -1,7 +1,10 @@
 const request = require('supertest');
 const express = require('express');
 const session = require('express-session');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
 const vulnerabilityRoutes = require('../../src/routes/vulnerabilities');
+const { csrfErrorHandler, errorHandler } = require('../../src/middleware/errorHandler');
 
 describe('Seguridad: CSRF (Cross-Site Request Forgery)', () => {
   let app;
@@ -9,11 +12,18 @@ describe('Seguridad: CSRF (Cross-Site Request Forgery)', () => {
 
   beforeEach(() => {
     app = express();
+    app.use(cookieParser());
     app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
+    
     app.use(session({
       secret: 'test-secret',
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: true,
+      cookie: {
+        httpOnly: true,
+        sameSite: 'Strict'
+      }
     }));
     
     // Middleware para simular usuario autenticado
@@ -22,7 +32,21 @@ describe('Seguridad: CSRF (Cross-Site Request Forgery)', () => {
       next();
     });
     
-    app.use('/api', vulnerabilityRoutes);
+    // Configurar CSRF protection con cookies
+    const csrfProtection = csrf({ cookie: true });
+    
+    // Endpoint para obtener token CSRF
+    app.get('/api/csrf-token', csrfProtection, (req, res) => {
+      res.json({ csrfToken: req.csrfToken() });
+    });
+    
+    // Usar rutas de vulnerabilidades
+    app.use('/api', vulnerabilityRoutes(csrfProtection));
+    
+    // Usar middlewares de error centralizados
+    app.use(csrfErrorHandler);
+    app.use(errorHandler);
+    
     agent = request.agent(app);
   });
 
@@ -42,10 +66,15 @@ describe('Seguridad: CSRF (Cross-Site Request Forgery)', () => {
   });
 
   test('❌ DEBE FALLAR: Debe validar el header Origin/Referer', async () => {
+    // Obtener primero un token CSRF válido
+    const tokenResponse = await agent.get('/api/csrf-token');
+    const csrfToken = tokenResponse.body.csrfToken;
+    
     // Simular request desde origen malicioso
     const response = await agent
       .post('/api/transfer')
       .set('Origin', 'http://evil-site.com')
+      .set('x-csrf-token', csrfToken)
       .send({
         fromAccount: '1234567890',
         toAccount: '0987654321',

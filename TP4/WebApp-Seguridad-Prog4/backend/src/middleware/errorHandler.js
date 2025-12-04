@@ -1,6 +1,22 @@
+// Middleware para manejo de errores CSRF específico
+const csrfErrorHandler = (err, req, res, next) => {
+  if (err.statusCode === 403) {
+    return res.status(403).json({
+      error: 'CSRF token validation failed'
+    });
+  }
+  next(err);
+};
+
 // Middleware para manejo de errores global
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
+
+  if (err.statusCode === 403) {
+    return res.status(403).json({
+      error: 'CSRF token validation failed'
+    });
+  }
 
   // VULNERABLE: Expone detalles del error en producción
   res.status(err.status || 500).json({
@@ -22,5 +38,6 @@ const notFound = (req, res, next) => {
 
 module.exports = {
   errorHandler,
+  csrfErrorHandler,
   notFound
 };

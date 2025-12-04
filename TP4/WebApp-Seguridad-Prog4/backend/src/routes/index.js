@@ -3,17 +3,17 @@ const csrf = require('csurf');
 const router = express.Router();
 
 // Configurar CSRF protection
-const csrfProtection = csrf({ cookie: false });
-
-// Importar todas las rutas
-const authRoutes = require('./auth');
-const productRoutes = require('./products');
-const captchaRoutes = require('./captcha');
+const csrfProtection = csrf({ cookie: true });
 
 // CSRF Token endpoint - debe estar ANTES de las rutas protegidas
 router.get('/csrf-token', csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
+
+// Importar todas las rutas
+const authRoutes = require('./auth');
+const productRoutes = require('./products');
+const captchaRoutes = require('./captcha');
 
 // Usar las rutas
 router.use('/', authRoutes);
