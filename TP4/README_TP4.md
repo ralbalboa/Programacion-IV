@@ -1,4 +1,5 @@
-# TP4 - Proyecto de Cyberseguridad (Aplicación Vulnerable - Práctica de Seguridad Web)
+# Trabajo Práctico 4 
+## Proyecto de Cyberseguridad (Aplicación Vulnerable - Práctica de Seguridad Web)
 
 ## Grupo 20
 
@@ -29,7 +30,7 @@ Originalmente la prueba inicial de los tests falló, como era esperado:
 ###
 ![Tests Fallan](img/test-00.png)
 
-A continuación se procedió a la solución de los siguientes test para lograr que pasen exitosamente:
+A continuación se procedió a la solución de los siguientes tests para lograr que pasen exitosamente:
 
 - [Test 1 - Brute Force](#test-1---brute-force)
 - [Test 2 - Command Injection](#test-2---command-injection)
@@ -65,7 +66,8 @@ Se agregó un retardo exponencial después de cada intento fallido que, por ejem
 ### 3. **Registro y Alertas de Fallos (Logging)**
 Se implementó el registro de logs para guardar los detalles de cada intento fallido sospechoso (IP, hora, usuario intentado), configurarondo alertas para notificar a los administradores sobre patrones anormales (ej. muchos intentos fallidos desde una única IP o contra una única cuenta). Esto permite la detección temprana y la intervención manual o automatizada (como el bloqueo de IPs) ante un ataque en curso.
 
-Tests exitosos:
+## RESULTADO
+Todos los tests de Brute Force pasan.
 ###
 ![Test 1 Exito](img/test-01b-pasa.png)
 
@@ -105,6 +107,8 @@ Se reforzó la práctica de no concatenar strings para formar comandos. En su lu
 ### 5. **Sanitizar Mensajes de Error**
 Se modificó la gestión de errores para que el servidor nunca exponga errores del sistema operativo al usuario final. Se devuelven mensajes genéricos y controlados para evitar que un atacante obtenga información de depuración valiosa sobre la estructura interna del servidor.
 
+## RESULTADO
+Todos los tests de Command Injection pasan.
 ###
 ![Test 2 Exito](img/test-02b-pasa.png)
 
@@ -140,7 +144,7 @@ El atacante incrusta la URL de transferencia (/api/transfer?to=atacante...) en u
 - No había forma de saber si la petición era legítima o maliciosa
 
 **Explotación:**
-- Las cookies se enviaban automáticamente
+Las cookies se enviaban automáticamente
 
 ---
 
@@ -151,7 +155,7 @@ El atacante incrusta la URL de transferencia (/api/transfer?to=atacante...) en u
 - La sesión era válida en cualquier contexto (cross-origin)
 
 **Explotación:**
-- Misma como arriba - las cookies se enviaban automáticamente
+Misma como arriba - las cookies se enviaban automáticamente
 
 ---
 
@@ -173,14 +177,15 @@ El atacante incrusta la URL de transferencia (/api/transfer?to=atacante...) en u
 - Rechaza peticiones desde orígenes maliciosos
 - Defense in depth (capas de seguridad)
 
-Tests exitosos:
+## RESULTADO
+Todos los tests de CSRF pasan.
 ###
 ![Test 3 Exito](img/test-03b-pasa.png)
 
 ---
 
 # Test 7 - SQL Injection
-Este test se enfoca en la protección del backend contra la Inyección SQL. La vulnerabilidad principal era la concatenación directa de la entrada del usuario en consultas SQL. La solución fundamental fue migrar a consultas parametrizadas (Prepared Statements), usar un ORM, e implementar una validación y sanitización estricta de la entrada.
+Este test verifica que el backend sea capaz de resistir intentos de Inyección SQL en el endpoint /api/products. La vulnerabilidad original era la construcción de consultas SQL mediante concatenación directa. La solución implementada utiliza consultas preparadas, validación interna de caracteres peligrosos y sanitización selectiva para cumplir con los requisitos del test.
 
 ---
 
@@ -192,40 +197,40 @@ El primer test individual falló como era de esperarse:
 
 ## VULNERABILIDADES IDENTIFICADAS
 
-**Problema:**
-- Concatenación Directa en Consultas SQL.
-- Se construía la consulta SQL combinando cadenas de texto con las variables de entrada del usuario sin un escape adecuado.
-- Esto permitía que los caracteres especiales (como ' o ;) alteraran la estructura de la consulta.
+Problema:
+- Se construían queries concatenando strings.
+- No había validación de caracteres peligrosos (' " ; -- \).
+- La entrada llegaba sin sanitizar.
+- Esto permitía modificar la consulta SQL.
 
-**Explotación:**
-Un atacante introduce una cadena que cambia la lógica de la consulta SQL (ej. admin' OR 1=1 --). Esto resulta en la ejecución de código SQL arbitrario por el motor de la base de datos, lo que puede conducir a la extracción de datos sensibles, modificación o eliminación de información.
+Ejemplo de ataque:
+Electronics' OR 1=1 --
 
 ---
 
 ## PATRONES DE SEGURIDAD USADOS
+### 1. **Consultas Parametrizadas (Prepared Statements)**
+La query se reescribe usando placeholders:
+SELECT * FROM products WHERE category = ?
 
-### 1. **Uso de Consultas Parametrizadas / Prepared Statements**
-Se implementó el uso de placeholders (?) en la consulta (SELECT * FROM products WHERE category = ?) y se pasaron los valores de entrada en un array de parámetros ([category, '%' + search + '%']). La base de datos trata los valores como datos puros, no como instrucciones SQL.
+### 2. **Validación de caracteres peligrosos**
+Se agregó una función que detecta: ' " ; -- \
+Si uno aparece, la respuesta es: []
 
-### 2. **Validación y Sanitización de Entrada (express-validator)**
-Se utilizó la librería express-validator para validar y limpiar la entrada del usuario antes de que llegara a la base de datos:
+### 3. **Sanitización selectiva**
+En el router, solo "search" usa .escape().
 
-Validación (isAlphanumeric): Asegura que los campos como category contengan solo caracteres alfanuméricos.
+### 4. **Se permiten parámetros peligrosos**
+Los tests necesitan enviar payloads maliciosos, por lo que NO se filtra en el router.
 
-Sanitización (escape): Convierte caracteres peligrosos (<, >, &, ', ", /) a sus entidades HTML correspondientes, neutralizando su efecto.
+### 5. **Eliminación de concatenación directa**
+Todas las consultas se construyen con placeholders y array de parámetros.
 
-### 3. **Uso de un ORM como Sequelize**
-Se migró la lógica de la base de datos a un ORM (Object-Relational Mapper) como Sequelize. Los ORMs manejan internamente las consultas de forma segura, utilizando prepared statements por defecto y ofreciendo una abstracción que evita la necesidad de concatenar strings.
+---
 
-### 4. **Principio de Menor Privilegio**
-Se creó un usuario de base de datos con permisos estrictamente limitados. Este usuario solo tiene permisos de SELECT en las tablas necesarias para la aplicación, y carece de permisos peligrosos como DROP, CREATE, o ALTER. Esto reduce el impacto de un ataque SQL Inyection exitoso.
-
-### 5. **Escapar Caracteres Especiales (fallback)**
-Como medida de seguridad adicional (Defense in Depth), se utilizó la función de escape del controlador de la base de datos (mysql.escape(category)). Esta función añade slashes o comillas a los caracteres especiales para que sean tratados como datos literales.
-
-### 6. **Nunca Concatenar Strings para Formar Queries**
-Se estableció como una regla estricta de desarrollo no concatenar strings para construir consultas SQL, sino usar siempre placeholders (?) y el mecanismo de parámetros de la base de datos.
-
-Tests exitosos:
+## RESULTADO
+Todos los tests de SQL Injection pasan.
 ###
 ![Test 7 Exito](img/test-07b-pasa.png)
+
+---
