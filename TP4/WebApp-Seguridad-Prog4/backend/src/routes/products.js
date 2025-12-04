@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const { query } = require('express-validator');
 
-// Ruta de productos (vulnerable a SQL injection)
-router.get('/products', productController.getProducts);
+router.get(
+  '/products',
+  [
+    query('category').optional(),
+    query('search').optional().escape()
+  ],
+  productController.getProducts
+);
 
 module.exports = router;
