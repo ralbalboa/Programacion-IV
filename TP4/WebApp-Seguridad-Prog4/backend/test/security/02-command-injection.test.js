@@ -14,7 +14,7 @@ describe('Seguridad: Command Injection', () => {
       resave: false,
       saveUninitialized: true
     }));
-    app.use('/api', vulnerabilityRoutes);
+    app.use('/api', vulnerabilityRoutes());
   });
 
   test('❌ DEBE FALLAR: No debe permitir ejecutar comandos arbitrarios', async () => {
